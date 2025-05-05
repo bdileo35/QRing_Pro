@@ -1,0 +1,24 @@
+# Ignorar node_modules
+node_modules/
+node_modulesBAK/
+node_modules copy/
+web-admin/node_modules/
+mobile-app/node_modules/
+
+# Ignorar archivos de construcción
+dist/
+build/
+
+# Ignorar configuraciones del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Ignorar logs
+*.log
+
+# Ignorar dependencias de Firebase y Next.js grandes
+web-admin/node_modules/@next/swc-*/next-swc.*
+
+# Ignorar configuraciones locales
+.env
+.env.local
