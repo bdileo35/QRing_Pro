@@ -4,23 +4,30 @@
 
 ### 1. Descripción General
 QRing Pro es una solución integral para control de accesos y gestión de visitantes en edificios, barrios y consorcios. El sistema se compone de:
-- **App móvil** (usuarios finales: residentes/inquilinos)
-- **Panel web admin** (administradores: consorcio, encargado, portero)
-- **Backend cloud** (Firebase: Firestore, Auth, Functions, FCM)
+- **App móvil** (usuarios finales: residentes/inquilinos).
+- **Panel web admin** (administradores: consorcio, encargado, portero).
+- **Backend cloud** (Firebase: Firestore, Auth, Functions, FCM).
+- **QR físico opcional**: El paquete puede incluir un QR impreso en PVC o una tarjeta RFID NFC para facilitar el acceso.
+
+---
 
 ### 2. Arquitectura y Flujos
 
-```
+```plaintext
 [Visitante] --escanea QR--> [Web visitante: elige timbre] --notifica--> [Usuario final (app)]
                                                                                   |
                                                                                   v
 [Administrador (WebAdmin)] --genera links--> [Usuarios finales (app)]
-```
+                                                                                  |
+                                                                                  v
+[SuperAdmin] --gestiona paquetes--> [Administradores y clientes]
 
-- **QR en la puerta:** Solo para visitantes. Permite anunciarse/tocar timbre.
-- **Links de invitación:** El admin los genera desde la web y los reparte a cada usuario final.
-- **App móvil:** Todos los usuarios usan la misma app, se asocian mediante link único.
-- **Web admin:** Solo para el administrador, gestiona todo el paquete de timbres y usuarios.
+
+** QR en la puerta: Solo para visitantes. Permite anunciarse/tocar timbre.
+** Links de invitación: El admin los genera desde la web y los reparte a cada usuario final.
+** App móvil: Todos los usuarios usan la misma app, se asocian mediante link único.
+** Web admin: Solo para el administrador, gestiona todo el paquete de timbres y usuarios.
+** SuperAdmin: Gestiona todos los clientes, paquetes y QR físicos.
 
 ### 3. Operativa y Roles
 
@@ -55,6 +62,7 @@ QRing Pro es una solución integral para control de accesos y gestión de visita
 - **Usuarios**: { id, nombre, email, idTimbre, idPaquete, rol }
 - **Invitaciones**: { id, idTimbre, idPaquete, token, estado }
 - **Accesos/Logs**: { id, idUsuario, idTimbre, fecha, tipo }
+
 
 ### 5. Modelo Comercial y Escalabilidad
 - El sistema se vende en **paquetes** de X cantidad de timbres (ej: 5, 10, 20, ...).
